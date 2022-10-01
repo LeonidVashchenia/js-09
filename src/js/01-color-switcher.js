@@ -9,6 +9,7 @@ let timerId = null;
 
 const chengerBodyBgrColor = () => {
   startButtunRef.disabled = true;
+  bodyRef.style.backgroundColor = getRandomHexColor();
   timerId = setInterval(() => {
     bodyRef.style.backgroundColor = getRandomHexColor();
   }, 1000);
