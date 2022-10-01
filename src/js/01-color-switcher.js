@@ -7,16 +7,15 @@ const stopButtunRef = document.querySelector('button[data-stop]');
 const bodyRef = document.querySelector('body');
 let timerId = null;
 
-const chengerBodyBgrColor = () => {
+const changedBodyBgrColor = () => {
   startButtunRef.disabled = true;
   bodyRef.style.backgroundColor = getRandomHexColor();
   timerId = setInterval(() => {
     bodyRef.style.backgroundColor = getRandomHexColor();
   }, 1000);
-  // console.log(startButtunRef);
 };
 
-startButtunRef.addEventListener('click', chengerBodyBgrColor);
+startButtunRef.addEventListener('click', changedBodyBgrColor);
 stopButtunRef.addEventListener('click', () => {
   startButtunRef.disabled = false;
   clearInterval(timerId);
