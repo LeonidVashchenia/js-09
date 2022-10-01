@@ -7,7 +7,7 @@ const stopButtunRef = document.querySelector('button[data-stop]');
 const bodyRef = document.querySelector('body');
 let timerId = null;
 
-const changedBodyBgrColor = () => {
+const changeBodyBgrColor = () => {
   startButtunRef.disabled = true;
   bodyRef.style.backgroundColor = getRandomHexColor();
   timerId = setInterval(() => {
@@ -15,7 +15,7 @@ const changedBodyBgrColor = () => {
   }, 1000);
 };
 
-startButtunRef.addEventListener('click', changedBodyBgrColor);
+startButtunRef.addEventListener('click', changeBodyBgrColor);
 stopButtunRef.addEventListener('click', () => {
   startButtunRef.disabled = false;
   clearInterval(timerId);
