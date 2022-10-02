@@ -1,20 +1,51 @@
-function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    // Fulfill
-  } else {
-    // Reject
-  }
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+const formRef = document.querySelector('.form');
+
+formRef.addEventListener('submit', onFormSubmit);
+
+function onFormSubmit(event) {
+  event.preventDefault();
+  const formData = new FormData(event.currentTarget);
+  const formDataObj = {};
+  formData.forEach((value, key) => {
+    formDataObj[key] = Number(value);
+  });
+  createPromises(formDataObj);
 }
 
-// HTML містить розмітку форми, в поля якої користувач буде вводити першу затримку в мілісекундах, крок збільшення затримки для кожного промісу після першого і кількість промісів, яку необхідно створити.
-// Напиши скрипт, який на момент сабміту форми викликає функцію createPromise(position, delay) стільки разів, скільки ввели в поле amount. Під час кожного виклику передай їй номер промісу (position), що створюється, і затримку, враховуючи першу затримку (delay), введену користувачем, і крок (step).
-// Доповни код функції createPromise таким чином, щоб вона повертала один проміс, який виконується або відхиляється через delay часу. Значенням промісу повинен бути об'єкт, в якому будуть властивості position і delay зі значеннями однойменних параметрів. Використовуй початковий код функції для вибору того, що потрібно зробити з промісом - виконати або відхилити.
-// createPromise(2, 1500)
-//   .then(({ position, delay }) => {
-//     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-//   })
-//   .catch(({ position, delay }) => {
-//     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-//   });
-// Для відображення повідомлень користувачеві, замість console.log(), використовуй бібліотеку notiflix.
+function createPromises({ delay, step, amount }) {
+  const array = Array.from({ length: amount }, (_, i) => delay + i * step);
+  const promises = array.map(createPromise);
+}
+
+function createPromise(delay, position) {
+  const shouldResolve = Math.random() > 0.3;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldResolve) {
+        // Fulfill
+        resolve(`Fulfilled promice ${position + 1} in ${delay} ms`);
+      } else {
+        // Reject
+        reject(`Rejected promice ${position + 1} in ${delay} ms`);
+      }
+    }, delay);
+  })
+    .then(value =>
+      Notify.success(value, {
+        position: 'center-center',
+        timeout: 3000,
+        width: '420px',
+        borderRadius: '8px',
+      })
+    )
+    .catch(error =>
+      Notify.failure(error, {
+        position: 'center-center',
+        timeout: 3000,
+        width: '420px',
+        borderRadius: '8px',
+      })
+    );
+}
