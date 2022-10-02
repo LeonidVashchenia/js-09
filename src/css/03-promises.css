@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  gap: 20px;
+}
+
+label {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
