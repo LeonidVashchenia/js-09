@@ -24,10 +24,8 @@ function createPromise(delay, position) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        // Fulfill
         resolve(`Fulfilled promice ${position + 1} in ${delay} ms`);
       } else {
-        // Reject
         reject(`Rejected promice ${position + 1} in ${delay} ms`);
       }
     }, delay);
