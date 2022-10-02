@@ -1,8 +1,13 @@
+body {
+  text-align: center;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   width: 350px;
   gap: 20px;
+  margin: auto;
 }
 
 label {
